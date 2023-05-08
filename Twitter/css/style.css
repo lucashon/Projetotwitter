@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat+Alternates:wght@400;700&family=Roboto&family=Rubik+Pixels&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main{
+    font-family: 'Roboto', sans-serif;
+    width: 65%;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    margin-left: 21rem;
+    justify-content: center;
+}
+
+.coluna1{
+    position: fixed;
+    right: 85rem;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+
+}
+.logo{
+    margin-top: 10px;
+    width: 2rem;
+    height: 1.9rem;
+    
+}
+.coluna2{
+    border-left: 1px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;
+    width: 60%;
+    margin-top: 65px;
+    height: auto;
+}
+.coluna3{
+    position: fixed;
+    left: 85rem;
+    width: 20%;
+    height: 30%;
+    margin: 10px 0 10px 10px;
+    display: flex;
+    padding-left: 5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 20px;
+    border: 1px solid #d9d9d9; 
+
+}
+.item-col1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+.coluna1 :hover{
+    border-radius: 20px;
+    background-color: rgb(160, 160, 181);
+}
+header{
+    display: flex;
+    flex-direction: row;
+    height: 4rem;
+    align-items: center;
+    width: 38.99%;
+    justify-content:space-around;
+    gap: 33rem;
+    background-color: rgba(255, 255, 255, 0.69);
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.4rem;
+    border-left: 1px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;
+}
+header{
+    position: fixed;
+    top: 0;
+  
+ }
+ h3{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+ }
+ #expl{
+    font-size: 1.8rem;
+    font-weight: 700;
+ }
+ #link1{
+    color: rgb(13, 48, 155);
+    text-decoration: underline;
+ }
+ #ferramenta{
+    width: 2rem;
+    height: 2rem;
+ }
+.perfil img{
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    margin-left: 2rem;
+    
+}
+.perfil{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    gap: 1.5rem;
+    
+}
+.img-publi{
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.img-publi img{
+    border-radius: 20px;
+    width: 32rem;
+    height: 22rem;
+}
+.textos{
+    margin-right: 6rem;
+}
+.oi, span{
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+}
+.icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    gap: 3.5rem;
+}
+.icons-flex{
+    display: flex;
+    flex-direction: row;
+}
+.publi{
+    border-bottom: 1px solid #d9d9d9;
+    
+}
+
+button{
+    margin: 1px solid black;
+    background-color: white;
+    border-radius: 15px;
+    width: 20rem;
+    height: 40px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0, 0.4);
+}
+
+.modal-content{
+    background-color: #fefefe;
+
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20rem;
+    border-radius: 10px;
+
+ }
+ .modal-itrens{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+ }
+
+ .close{
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+ }
+ .close:hover, .close:focus{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+ }
+ .login-modal{
+    margin: 1px solid black;
+    background-color: white;
+    border-radius: 15px;
+    width: 19rem;
+    height: 30px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+ }
+
+ input{
+    width: 19rem;
+    border-radius: 10px;
+    border:1px solid #aaa;
+    padding-left: 10px;
+    height: 2rem;
+ }
+
+ #myBtn{
+    width: 100px;
+    height: 50px;
+ }
+
+ .box-modal{
+   display:flex;
+   justify-content: end;
+   display: flex;
+   justify-content: space-around;
+   color: #ffff;
+   background-color: rgb(59, 125, 190);
+    
+ }
+
