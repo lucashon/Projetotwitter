@@ -1,348 +1,138 @@
+const state = {
+    view: 'landing',
+    user: { name: "Lucas", handle: "@iplusca", pfp: "Twitter/assets/perfil1.png" },
+    posts: [
+        { id: 1, user: "Sérgio Santos", handle: "@ZAMENZA", time: "16 h", content: "Tadeu ignorou completamente Ana Paula e Juliano. Gabriela merecia essa homenagem... #BBB26", img: "Twitter/assets/viihtube2.png", pfp: "Twitter/assets/perfil1.png", likes: "46 mil", comments: 211, retweets: "2 mil", views: "432 mil" },
+        { id: 2, user: "G1 - Pop e Arte", handle: "@g1poparte", time: "1 h", content: "Beyoncé encanta Simba em nova produção. Confira os detalhes no portal.", img: "Twitter/assets/logott.png", pfp: "Twitter/assets/perfilg1.png", likes: 4, comments: 6, retweets: 8, views: "1.5k" },
+        { id: 3, user: "Bernhard Mueller", handle: "@muellerberndt", time: "Anúncio", content: "Como a Holografia de Patch do Observador torna a Semiótica física.", img: null, pfp: "Twitter/assets/perfil3.png", likes: 12, comments: 2, retweets: 1, views: "10k" },
+        { id: 4, user: "Marcus Arboés", handle: "@marcusarboes", time: "5 h", content: "Matheus Mbappé voando baixo no sub-10!", img: "Twitter/assets/jogador.png", pfp: "Twitter/assets/perfil1.png", likes: 850, comments: 12, retweets: 45, views: "12k" },
+        { id: 5, user: "Eliezer", handle: "@eliezer", time: "2 h", content: "Oi gente, invadindo aqui! ❤️", img: "Twitter/assets/viintube3.png", pfp: "Twitter/assets/perfilEliezer.png", likes: "36 mil", comments: 150, retweets: "1.2 mil", views: "80k" },
+        { id: 6, user: "Tech News", handle: "@technews", time: "10 h", content: "Ubuntu 24.04 está mudando o jogo para devs Linux. O que acham?", img: null, pfp: "Twitter/assets/perfil3.png", likes: 500, comments: 80, retweets: 30, views: "5k" },
+        { id: 7, user: "One Piece", handle: "@op_brasil", time: "12 h", content: "O novo capítulo está de explodir a cabeça! 🏴‍☠️", img: null, pfp: "Twitter/assets/perfil1.png", likes: "15 mil", comments: 900, retweets: "5k", views: "1M" },
+        { id: 8, user: "G1", handle: "@g1", time: "15 h", content: "Últimas notícias sobre tecnologia e inovação no Brasil.", img: "Twitter/assets/bigbig.jfif", pfp: "Twitter/assets/perfilg1.png", likes: "96 mil", comments: "1.2k", retweets: "10k", views: "2M" },
+        { id: 9, user: "Design Daily", handle: "@design", time: "20 h", content: "Dica: Bordas suaves (low opacity) deixam sua UI muito mais moderna.", img: null, pfp: "Twitter/assets/perfil3.png", likes: 230, comments: 5, retweets: 12, views: "1k" },
+        { id: 10, user: "Futebol", handle: "@fut_br", time: "1 d", content: "Quem leva a taça este ano? Deixe seu palpite!", img: null, pfp: "Twitter/assets/perfil1.png", likes: "2 mil", comments: 400, retweets: 150, views: "20k" }
+    ]
+};
 
-// Mostrar section coluna 01
-const coluna01 = document.getElementsByClassName('coluna1')[0]
-async function col1(){
-    coluna01.innerHTML = `<section class="coluna1">
-    <img class="logo" src="assets/logott.png" alt="">
+// Funções de navegação e render
+function navigate(view) { state.view = view; render(); }
 
-
-    <div class="item-col1">
-        <svg class="logo" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-hash" viewBox="0 0 16 16">
-            <path
-                d="M8.39 12.648a1.32 1.32 0 0 0-.015.18c0 .305.21.508.5.508.266 0 .492-.172.555-.477l.554-2.703h1.204c.421 0 .617-.234.617-.547 0-.312-.188-.53-.617-.53h-.985l.516-2.524h1.265c.43 0 .618-.227.618-.547 0-.313-.188-.524-.618-.524h-1.046l.476-2.304a1.06 1.06 0 0 0 .016-.164.51.51 0 0 0-.516-.516.54.54 0 0 0-.539.43l-.523 2.554H7.617l.477-2.304c.008-.04.015-.118.015-.164a.512.512 0 0 0-.523-.516.539.539 0 0 0-.531.43L6.53 5.484H5.414c-.43 0-.617.22-.617.532 0 .312.187.539.617.539h.906l-.515 2.523H4.609c-.421 0-.609.219-.609.531 0 .313.188.547.61.547h.976l-.516 2.492c-.008.04-.015.125-.015.18 0 .305.21.508.5.508.265 0 .492-.172.554-.477l.555-2.703h2.242l-.515 2.492zm-1-6.109h2.266l-.515 2.563H6.859l.532-2.563z" />
-        </svg>
-        <span id="expl">Explorar</span>
-    </div>
-
-    <div class="item-col1">
-        <svg class="logo" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-gear-wide-connected" viewBox="0 0 16 16">
-            <path
-                d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z" />
-        </svg>
-        <p>Configurações</p>
-    </div>
-</section>`
+function render() {
+    const root = document.getElementById('app');
+    root.innerHTML = state.view === 'landing' ? renderLanding() : renderFeed();
 }
-col1()
 
-// Mostrar coluna 02
-const coluna2 = document.getElementsByClassName('coluna2')[0]
-async function col2(){
-    coluna2.innerHTML =
+function renderLanding() {
+    return `
+    <div class="vh-100 d-flex flex-column animate-fade overflow-hidden">
+        <div class="row flex-grow-1 align-items-center w-100 m-0">
+            <div class="col-lg-7 d-none d-lg-flex justify-content-center">
+                <i class="bi bi-twitter-x" style="font-size: clamp(10rem, 25vw, 20rem);"></i>
+            </div>
+            <div class="col-lg-5 p-5">
+                <i class="bi bi-twitter-x d-lg-none fs-1 mb-4"></i>
+                <h1 class="display-1 fw-bold mb-5" style="letter-spacing: -2px;">Acontecendo agora</h1>
+                <h2 class="h3 fw-bold mb-4">Inscreva-se hoje</h2>
+                <div class="d-grid gap-2 col-xl-9">
+                    <button class="btn btn-light rounded-pill fw-bold py-2">Fazer login como ${state.user.name}</button>
+                    <button class="btn btn-light rounded-pill fw-bold py-2">Inscrever-se com Apple</button>
+                    <div class="d-flex align-items-center my-2 text-secondary"><hr class="flex-grow-1 opacity-25"> <span class="mx-2 small">OU</span> <hr class="flex-grow-1 opacity-25"></div>
+                    <button class="btn btn-primary rounded-pill fw-bold py-2">Criar conta</button>
+                    <p class="text-muted" style="font-size: 11px;">Ao se inscrever, você concorda com os Termos de Serviço.</p>
+                    <h6 class="fw-bold mt-5">Já tem uma conta?</h6>
+                    <button class="btn btn-outline-secondary rounded-pill fw-bold py-2 text-primary" onclick="navigate('feed')">Entrar</button>
+                </div>
+            </div>
+        </div>
+        ${renderFooter()}
+    </div>`;
+}
 
-`  <header>
-                <h3>Explorar</h3>
-                <svg id="ferramenta" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-gear-wide-connected" viewBox="0 0 16 16">
-                    <path
-                        d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z" />
-                </svg>
-            </header>
+function renderFeed() {
+    return `
+    <div class="container animate-fade">
+        <div class="row">
+            <aside class="col-2 col-xl-3 vh-100 sticky-top p-2 border-end border-soft d-flex flex-column align-items-end align-items-xl-start">
+                ${renderSidebar()}
+            </aside>
 
-            <section class="publi">
-                <div class="perfil">
-                    <div>
-                        <img src="assets/perfil1.png" alt="">
+            <main class="col-10 col-md-9 col-xl-6 p-0 border-end border-soft">
+                <div class="sticky-top bg-black bg-opacity-75 border-bottom border-soft" style="backdrop-filter: blur(12px)">
+                    <div class="d-flex border-bottom border-soft">
+                        <div class="flex-grow-1 text-center py-3 fw-bold border-bottom border-primary border-4">Para você</div>
+                        <div class="flex-grow-1 text-center py-3 text-muted">Seguindo</div>
                     </div>
-
-                    <div class="textos">
-                        <div>
-                            <p><span>Marcus Arboés</span>
-                                @marcusarboes
-                                ·
-                                5 h</p>
+                    <div class="p-3 d-flex">
+                        <img src="${state.user.pfp}" class="rounded-circle me-3" style="width: 45px; height: 45px; object-fit: cover">
+                        <div class="w-100">
+                            <input type="text" class="form-control bg-transparent border-0 text-white fs-5" placeholder="O que está acontecendo?">
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div class="text-primary fs-5">
+                                    <i class="bi bi-image me-3"></i><i class="bi bi-filetype-gif me-3"></i><i class="bi bi-emoji-smile me-3"></i><i class="bi bi-geo-alt opacity-50"></i>
+                                </div>
+                                <button class="btn btn-primary rounded-pill fw-bold px-4">Postar</button>
+                            </div>
                         </div>
-
-                        <div class="oi">
-                           <br> Esse é o Matheus Mbappé, camisa 10 do sub10 da escolinha do meu irmão. <br>
-                            
-                            Na rodada 1, tava de castigo porque não estudou pra prova <br>
-                            
-                            Na rodada 2, foi expulso porque xingou o juiz <br>
-                            
-                            Na rodada 3, tava suspenso <br>
-                            
-                            Na final, fez 3 gols, deu uma assistência e ainda foi o craque da partida <br><br> </div>
                     </div>
-
-                    <div>...</div>
-
                 </div>
+                <div>${state.posts.map(p => renderPostCard(p)).join('')}</div>
+            </main>
 
-                <div class="img-publi">
-                    <img src="assets/jogador.png" alt="Foto">
+            <aside class="d-none d-xl-block col-xl-3 p-3">
+                <div class="bg-dark bg-opacity-50 rounded-4 p-3 mb-3 border border-soft">
+                    <h5 class="fw-bold mb-3">O que está acontecendo</h5>
+                    <div class="mb-3 small"><strong>#Maceio</strong><br><span class="text-muted">1.500 posts</span></div>
+                    <div class="mb-3 small"><strong>#SistemasDeInformacao</strong><br><span class="text-muted">22k posts</span></div>
                 </div>
-
-                <article class="icons">
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right" viewBox="0 0 16 16">
-                            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
-                          </svg>
-                          4 mil
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
-                          </svg>
-                          786
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                          </svg>
-                          <p class="like">8 mil</p>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
-                            <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
-                          </svg>
-                          412,3 mil
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
-                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
-                          </svg>
-              
-                    </div>
-                </article>
-            </section>
-            <section class="publi">
-                <div class="perfil">
-                    <div>
-                        <img src="assets/perfilEliezer.png" alt="">
-                    </div>
-
-                    <div class="textos">
-                        <div>
-                          <p>  <span>Eliezer</span>
-                            @eliezer
-                            · 2 h</p>
-                        </div>
-
-                        <div class="oi"> Oi gente, to invadindo o tt do papai pra falar “oi pra vocês” ❤️</div>
-                    </div>
-
-                    <div>...</div>
-
-                </div>
-
-                <div class="img-publi">
-                    <img src="assets/viintube3.png" alt="Foto">
-                </div>
-
-                <article class="icons">
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right" viewBox="0 0 16 16">
-                            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
-                          </svg>
-                          1 mil
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
-                          </svg>
-                          482
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                          </svg>
-                          <p class="like3">36,8 mil</p>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
-                            <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
-                          </svg>
-                          192,3 mil
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
-                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
-                          </svg>
-              
-                    </div>
-                </article>
-            </section>
-
-            <section class="publi">
-                <div class="perfil">
-                    <div>
-                        <img src="assets/perfil3.png" alt="">
-                    </div>
-
-                    <div class="textos">
-                        <div>
-                          <p> <span>André Janones</span>
-                                @AndreJanonesAdv .2h
-                        </div></p> 
-
-                        <div class="oi">O capitão tá pedindo pessoal! Bora subir: <br>
-
-                            CORRUPTO PORRA</div>
-                    </div>
-
-                    <div>...</div>
-
-                </div>
-
-                <div class="img-publi">
-                    <img src="assets/bozo.png" alt="Foto">
-                </div>
-
-                <article class="icons">
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right" viewBox="0 0 16 16">
-                            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
-                          </svg>
-                          7 mil
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
-                          </svg>
-                          440
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                          </svg>
-                          <p class="like7">36,8 mil</p>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
-                            <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
-                          </svg>
-                          2,3 mil
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
-                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
-                          </svg>
-              
-                    </div>
-                </article>
-            </section>
-            <section class="publi">
-                <div class="perfil">
-                    <div>
-                        <img src="assets/perfilg1.png" alt="">
-                    </div>
-
-                    <div class="textos">
-                        <div>
-                          <p> <span> g1</span>
-                            
-                            @g1   . 7 h
-                        </div></p> 
-
-                        <div class="oi">
-                            Influenciadora Flávia Big Big morre aos 26 anos <p id="link1">http://glo.bo/42w7oXy </p> </div>
-                    </div>
-
-                    <div>...</div>
-
-                </div>
-
-                <div class="img-publi">
-                    <img src="assets/bigbig.jfif" alt="Foto">
-                </div>
-
-                <article class="icons">
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right" viewBox="0 0 16 16">
-                            <path d="M2 1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h9.586a2 2 0 0 1 1.414.586l2 2V2a1 1 0 0 0-1-1H2zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
-                          </svg>
-                          7 mil
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
-                          </svg>
-                          130
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                          </svg>
-                          <p class="like5">96,8 mil</p>
-                    </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
-                            <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
-                          </svg>
-                          422,3 mil
-                    </div>
-                    <div class="icons-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
-                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
-                          </svg>
-              
-                    </div>
-                </article>
-            </section>`
-}
-col2()
-
-
-// EVENTO MOUSE : LIKE
-document.querySelector('.like').addEventListener('mouseover',()=>{
-    document.querySelector('.like').style.color = 'red';
-})
-document.querySelector('.like').addEventListener('mouseout',()=>{
-    document.querySelector('.like').style.color = 'black';
-})
-
-document.querySelector('.like3').addEventListener('mouseover',()=>{
-    document.querySelector('.like3').style.color = 'red';
-})
-document.querySelector('.like3').addEventListener('mouseout',()=>{
-    document.querySelector('.like3').style.color = 'black';
-})
-
-document.querySelector('.like5').addEventListener('mouseover',()=>{
-    document.querySelector('.like5').style.color = 'red';
-})
-document.querySelector('.like5').addEventListener('mouseout',()=>{
-    document.querySelector('.like5').style.color = 'black';
-})
-
-document.querySelector('.like7').addEventListener('mouseover',()=>{
-    document.querySelector('.like7').style.color = 'red';
-})
-document.querySelector('.like7').addEventListener('mouseout',()=>{
-    document.querySelector('.like7').style.color = 'black';
-})
-
-
-// MODAL
-
-var modal = document.getElementById('myModal'); // Obtem o modal
-
-var btn = document.getElementById('myBtn'); // Obtem o botao que abre o modal
-
-var span = document.getElementsByClassName('close')[0]; // Obtém o elemento <span> que fecha o modal
-
-// quando o usuario clicar no botao, abre o modal
-btn.onclick = function(){
-    modal.style.display = "block";
-
+            </aside>
+        </div>
+    </div>`;
 }
 
-// quando o usuario clicar no <span> (x), frecha o modal
-span.onclick = function(){
-    modal.style.display = "none";
-
+function renderSidebar() {
+    const navItems = [
+        { icon: 'house-door-fill', label: 'Página Inicial' },
+        { icon: 'search', label: 'Explorar' },
+        { icon: 'bell', label: 'Notificações' },
+        { icon: 'envelope', label: 'Mensagens' },
+        { icon: 'person', label: 'Perfil' }
+    ];
+    return `
+        <i class="bi bi-twitter-x fs-2 p-3"></i>
+        ${navItems.map(n => `<div class="nav-btn d-flex align-items-center p-3 rounded-pill">
+            <i class="bi bi-${n.icon} fs-4"></i> <span class="d-none d-xl-inline ms-3 fs-5">${n.label}</span>
+        </div>`).join('')}
+        <button class="btn btn-primary rounded-pill w-100 py-3 mt-3 d-none d-xl-block fw-bold">Postar</button>
+        <button class="btn btn-primary rounded-circle p-0 mt-3 d-xl-none" style="width:50px; height:50px"><i class="bi bi-plus-lg fs-4"></i></button>
+    `;
 }
 
-// quando o usuario clicar fora do modal, fecha o modal
-window.onclick = function(event){
-    if(event.target == modal){
-        modal.style.display = "none";
-    }
+function renderPostCard(p) {
+    return `
+    <article class="p-3 border-bottom border-soft post-item">
+        <div class="d-flex">
+            <img src="${p.pfp}" class="rounded-circle me-3" style="width: 48px; height: 48px; object-fit:cover">
+            <div class="w-100">
+                <div class="d-flex justify-content-between">
+                    <span><strong>${p.user}</strong> <i class="bi bi-patch-check-fill text-primary small"></i> <small class="text-muted">${p.handle} · ${p.time}</small></span>
+                    <i class="bi bi-three-dots text-muted"></i>
+                </div>
+                <p class="mt-2 mb-2 fs-6">${p.content}</p>
+                ${p.img ? `<img src="${p.img}" class="img-fluid rounded-4 border border-soft mb-3 w-100">` : ''}
+                <div class="d-flex justify-content-between text-muted w-100" style="max-width: 425px">
+                    <span class="act"><i class="bi bi-chat"></i> ${p.comments}</span>
+                    <span class="act"><i class="bi bi-arrow-repeat"></i> ${p.retweets}</span>
+                    <span class="act-heart"><i class="bi bi-heart"></i> ${p.likes}</span>
+                    <span class="act"><i class="bi bi-bar-chart"></i> ${p.views}</span>
+                </div>
+            </div>
+        </div>
+    </article>`;
 }
+
+function renderFooter() {
+    return `<footer class="p-3 text-center small text-muted border-top border-soft">© 2026 Lucas Corp | X Clone</footer>`;
+}
+
+render();
