@@ -56,7 +56,6 @@ input::placeholder { color: #71767b !important; }
 .act:hover { color: #1d9bf0; cursor: pointer; }
 .act-heart:hover { color: #f91880; cursor: pointer; }
 
-/* Animação suave de entrada */
 .animate-fade {
     animation: fadeIn 0.5s ease-in-out;
 }
@@ -66,7 +65,6 @@ input::placeholder { color: #71767b !important; }
     to { opacity: 1; }
 }
 
-/* Garante que o container não cause scroll horizontal */
 .container {
     max-width: 1300px;
 }

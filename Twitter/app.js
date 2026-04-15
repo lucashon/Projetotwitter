@@ -2,7 +2,7 @@ const state = {
     view: 'landing',
     user: { name: "Lucas", handle: "@iplusca", pfp: "Twitter/assets/perfil1.png" },
     posts: [
-        { id: 1, user: "Sérgio Santos", handle: "@ZAMENZA", time: "16 h", content: "Tadeu ignorou completamente Ana Paula e Juliano. Gabriela merecia essa homenagem... #BBB26", img: "Twitter/assets/viihtube2.png", pfp: "Twitter/assets/perfil1.png", likes: "46 mil", comments: 211, retweets: "2 mil", views: "432 mil" },
+        { id: 1, user: "Sérgio Santos", handle: "@ZAMENZA", time: "16 h", content: "Tadeu ignorou completamente Ana Paula e Juliano. Gabriela merecia essa homenagem... #BBB26", img: "Twitter/assets/Gabi.avif", pfp: "Twitter/assets/perfil1.png", likes: "46 mil", comments: 211, retweets: "2 mil", views: "432 mil" },
         { id: 2, user: "G1 - Pop e Arte", handle: "@g1poparte", time: "1 h", content: "Beyoncé encanta Simba em nova produção. Confira os detalhes no portal.", img: "Twitter/assets/logott.png", pfp: "Twitter/assets/perfilg1.png", likes: 4, comments: 6, retweets: 8, views: "1.5k" },
         { id: 3, user: "Bernhard Mueller", handle: "@muellerberndt", time: "Anúncio", content: "Como a Holografia de Patch do Observador torna a Semiótica física.", img: null, pfp: "Twitter/assets/perfil3.png", likes: 12, comments: 2, retweets: 1, views: "10k" },
         { id: 4, user: "Marcus Arboés", handle: "@marcusarboes", time: "5 h", content: "Matheus Mbappé voando baixo no sub-10!", img: "Twitter/assets/jogador.png", pfp: "Twitter/assets/perfil1.png", likes: 850, comments: 12, retweets: 45, views: "12k" },
